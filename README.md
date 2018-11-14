@@ -8,3 +8,4 @@ Clone this repo then run this command in terminal:
 npm i
 node index
 ```
+Then go to http://localhost:3000
