@@ -1,8 +1,8 @@
+<!DOCTYPE html>
 <html>
 
 <head>
    <title>Linear Regression</title>
-   <script src="./app.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"> </script>
 </head>
@@ -10,21 +10,36 @@
 <body>
    <h1>Linear Regression</h1>
    <button id='btnReset'>Reset</button>
-   <button id='btnTrain'>Train</button> <br />
-   <canvas id="myChart" width="400" height="400"></canvas>
+   <button id='btnTrain'>Train</button>
+   <button id='btnHalt'>Halt</button> <br />
+   <span>
+      <canvas id="myChart" width="400" height="400" style='display:inline-block;'></canvas>
+      <div style='display:inline-block;'>
+         <p><strong>Learning Rate:</strong> <input type="number" id="learningRate" oninput="onLearningRateChange(this.value)" /></p>
+         <p><strong>Iteration:</strong> <span id='iter'></span>/<input type="number" id="totalIter" oninput="onIterationNumberChange(this.value)" />
+         </p>
+         <p><strong>Loss:</strong> <span id='loss'></span></p>
+         <p><strong>Coefficient: a = </strong> <span id='co_a'></span>; <strong>b = </strong> <span id='co_b'></span></p>
+      </div>
+   </span>
    <script>
-      var btnTrain = document.getElementById('btnTrain')
-      var btnReset = document.getElementById('btnReset')
-      btnReset.addEventListener('click', function () {
-         reset();
-      })
-      btnTrain.addEventListener('click', function () {
-         if (!isTraining) train();
-      });
       window.onload = function () {
+         var btnTrain = document.getElementById('btnTrain')
+         var btnReset = document.getElementById('btnReset')
+         var btnHalt = document.getElementById('btnHalt')
+         btnReset.addEventListener('click', function () {
+            reset();
+         })
+         btnTrain.addEventListener('click', function () {
+            if (!isTraining) train();
+         });
+         btnHalt.addEventListener('click', function () {
+            halt();
+         });
          reset();
       };
    </script>
+   <script src="./app.js"></script>
 </body>
 
 </html>
