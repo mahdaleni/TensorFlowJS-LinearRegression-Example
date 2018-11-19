@@ -1,5 +1,5 @@
-# TensorFlowJS Linear Regression Example
-An example of how to use TensorFlowJS's Low-level API to do Linear Regression
+# TensorFlowJS Linear Regression and Polynominal Regression Examples
+Examples of how to use TensorFlowJS's Low-level API to do Linear Regression and Polynomial Regression
 
 ### Installing and Running
 
@@ -18,4 +18,7 @@ This page do the following: <br />
 2. Draw a line with random coefficients
 3. Use gradient descent algorithm to modify line's coefficients until Total distance of all dots to the line (on yAxis) is minimum. <br />
 
-(The corresponding tensorflowjs api is tf.train.sgd, stands for Stochastic gradient descent, but it's just a normal gradient descent optimizer despite it's name)
+### Note 
+
+- The used tensorflowjs api is tf.train.sgd, stands for Stochastic Gradient Descent, but it's just a normal gradient descent optimizer despite it's name);
+- The convergence speed will be super fast if you can make your training data range length (input) approximately 2 (eg: x ∈ [-1, 1]) and learning rate 0.5.

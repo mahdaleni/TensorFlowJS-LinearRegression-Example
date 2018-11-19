@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Polynomial Regression</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.3/dist/tf.min.js"></script>
+</head>
+
+<body>
+   <h1>Polynomial Regression</h1>
+   <span id="polynomialRegressionFrame">
+      <button class='btnReset'>Reset</button>
+      <button class='btnTrain'>Train</button>
+      <button class='btnHalt'>Halt</button> <br />
+      <canvas class="myChart" width="400" height="400" style='display:inline-block;'></canvas>
+      <div style='display:inline-block;'>
+         <p><strong>Learning Rate:</strong> <input type="number" class="learningRate" /></p>
+         <p><strong>Iteration:</strong> <span class='iter'></span>/<input type="number" class="totalIter" />
+         </p>
+         <p><strong>Loss:</strong> <span class='loss'></span></p>
+         <p><strong>Coefficient a = </strong> <span class='co_a'></span></p>
+         <p><strong>Coefficient b = </strong> <span class='co_b'></span></p>
+         <p><strong>Coefficient c = </strong> <span class='co_c'></span></p>
+         <p><strong>Coefficient d = </strong> <span class='co_d'></span></p>
+      </div>
+      <script>
+         window.addEventListener('load', function () {
+            var polynomialRegressionFrame = document.getElementById('polynomialRegressionFrame');
+            var polynomialRegressionModel = new PolynomialRegression(polynomialRegressionFrame);
+            var btnTrain = polynomialRegressionFrame.getElementsByClassName('btnTrain')[0]
+            var btnReset = polynomialRegressionFrame.getElementsByClassName('btnReset')[0]
+            var btnHalt = polynomialRegressionFrame.getElementsByClassName('btnHalt')[0]
+            var learningRate = polynomialRegressionFrame.getElementsByClassName('learningRate')[0]
+            var totalIter = polynomialRegressionFrame.getElementsByClassName('totalIter')[0]
+            learningRate.addEventListener('input', function () {
+               polynomialRegressionModel.onLearningRateChange(this.value);
+            });
+            totalIter.addEventListener('input', function () {
+               polynomialRegressionModel.onIterationNumberChange(this.value);
+            });
+            btnReset.addEventListener('click', function () {
+               polynomialRegressionModel.reset();
+            })
+            btnTrain.addEventListener('click', function () {
+               if (!polynomialRegressionModel.isTraining)
+                  polynomialRegressionModel.train();
+            });
+            btnHalt.addEventListener('click', function () {
+               polynomialRegressionModel.halt();
+            });
+            polynomialRegressionModel.reset();
+         });
+      </script>
+   </span>
+   <script src="./helper.js"></script>
+   <script src="./PolynomialRegression.js"></script>
+</body>
+
+</html>
